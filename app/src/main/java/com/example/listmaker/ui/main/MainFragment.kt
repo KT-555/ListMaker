@@ -46,9 +46,7 @@ class MainFragment(val clickListener: MainFragmentInteractionListener) : Fragmen
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(
             requireActivity(),
-            MainViewModelFactory(PreferenceManager.getDefaultSharedPreferences(requireActivity()))
-        )
-            .get(MainViewModel::class.java)
+            MainViewModelFactory(PreferenceManager.getDefaultSharedPreferences(requireActivity()))).get(MainViewModel::class.java)
 
         val recyclerViewAdapter = ListSelectionRecyclerViewAdapter(viewModel.lists, this)
         binding.listsRecyclerview.adapter = recyclerViewAdapter

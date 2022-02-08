@@ -1,5 +1,6 @@
 package com.example.listmaker
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,8 @@ import com.example.listmaker.ui.main.MainViewModelFactory
 
 class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionListener {
 
+
+
     private lateinit var binding: MainActivityBinding
     private lateinit var viewModel: MainViewModel
 
@@ -27,9 +30,11 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this,
+        viewModel = ViewModelProvider(
+            this,
             MainViewModelFactory(
-                PreferenceManager.getDefaultSharedPreferences(this))
+                PreferenceManager.getDefaultSharedPreferences(this)
+            )
         )
             .get(MainViewModel::class.java)
 
@@ -39,8 +44,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
 
         if (savedInstanceState == null) {
             val mainFragment = MainFragment.newInstance(this)
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, mainFragment)
+            supportFragmentManager.beginTransaction().replace(R.id.detail_container, mainFragment)
                 .commitNow()
         }
 
@@ -77,16 +81,26 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
     }
 
     private fun showListDetail(list: TaskList) {
-        // 1
-        val listDetailIntent = Intent(this,
-            ListDetailActivity::class.java)
-        // 2
+        val listDetailIntent = Intent(this, ListDetailActivity::class.java)
         listDetailIntent.putExtra(INTENT_LIST_KEY, list)
-        // 3
-        startActivity(listDetailIntent)
+        startActivityForResult(listDetailIntent, LIST_DETAIL_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // 1
+        if (requestCode == LIST_DETAIL_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // 2
+            data?.let {
+                // 3
+                viewModel.updateList(data.getParcelableExtra(INTENT_LIST_KEY)!!)
+                viewModel.refreshLists()
+            }
+        }
     }
 
     companion object {
         const val INTENT_LIST_KEY = "list"
+        const val LIST_DETAIL_REQUEST_CODE = 123
     }
 }
