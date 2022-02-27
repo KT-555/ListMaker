@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.listmaker.R
 import com.example.listmaker.databinding.MainFragmentBinding
-import com.example.listmaker.models.TaskList
+import com.example.listmaker.TaskList
 
-class MainFragment(val clickListener: MainFragmentInteractionListener) : Fragment(),
-    ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener  {
+class MainFragment : Fragment(), ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
 
-    //lateinit var clickListener: MainFragmentInteractionListener
+    lateinit var clickListener: MainFragmentInteractionListener
 
     interface MainFragmentInteractionListener {
+
 
 
         fun listItemTapped(list: TaskList)
@@ -26,7 +25,7 @@ class MainFragment(val clickListener: MainFragmentInteractionListener) : Fragmen
     private lateinit var binding: MainFragmentBinding
 
     companion object {
-        fun newInstance(clickListener: MainFragmentInteractionListener) = MainFragment(clickListener)
+        fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listmaker.databinding.ListItemViewHolderBinding
-import com.example.listmaker.models.TaskList
+import com.example.listmaker.TaskList
 
 class ListItemsRecyclerViewAdapter(var list: TaskList) : RecyclerView.Adapter<ListItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType:

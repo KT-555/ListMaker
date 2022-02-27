@@ -2,7 +2,7 @@ package com.example.listmaker.ui.main
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import com.example.listmaker.models.TaskList
+import com.example.listmaker.TaskList
 
 
 // 1
@@ -40,5 +40,13 @@ class MainViewModel(private val sharedPreferences: SharedPreferences) : ViewMode
     fun refreshLists() {
         lists.clear()
         lists.addAll(retrieveLists())
+    }
+
+    lateinit var list: TaskList
+    lateinit var onTaskAdded: (() -> Unit)
+
+    fun addTask(task: String) {
+        list.tasks.add(task)
+        onTaskAdded.invoke()
     }
 }

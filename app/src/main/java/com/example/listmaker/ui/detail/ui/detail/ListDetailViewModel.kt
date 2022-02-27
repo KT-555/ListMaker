@@ -1,7 +1,7 @@
 package com.example.listmaker.ui.detail.ui.detail
 
 import androidx.lifecycle.ViewModel
-import com.example.listmaker.models.TaskList
+import com.example.listmaker.TaskList
 
 class ListDetailViewModel() : ViewModel() {
     lateinit var onTaskAdded: (() -> Unit)

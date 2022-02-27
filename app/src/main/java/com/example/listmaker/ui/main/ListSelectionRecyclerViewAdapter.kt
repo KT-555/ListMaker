@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listmaker.databinding.ListSelectionViewHolderBinding
-import com.example.listmaker.models.TaskList
+import com.example.listmaker.TaskList
 
 class ListSelectionRecyclerViewAdapter(val lists : MutableList<TaskList>, val clickListener: ListSelectionRecyclerViewClickListener) : RecyclerView.Adapter<ListSelectionViewHolder>() {
 
