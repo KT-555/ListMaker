@@ -8,7 +8,7 @@
     tools:context=".ui.main.MainFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lists_recyclerview"
+        android:id="@+id/listsRecyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

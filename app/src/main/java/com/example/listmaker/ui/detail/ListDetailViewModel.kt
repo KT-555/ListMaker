@@ -1,4 +1,4 @@
-package com.example.listmaker.ui.detail.ui.detail
+package com.example.listmaker.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.example.listmaker.TaskList

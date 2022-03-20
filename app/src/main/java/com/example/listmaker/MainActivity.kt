@@ -13,7 +13,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.example.listmaker.databinding.MainActivityBinding
 import com.example.listmaker.ui.detail.ListDetailActivity
-import com.example.listmaker.ui.detail.ui.detail.ListDetailFragment
+import com.example.listmaker.ui.detail.ListDetailFragment
 import com.example.listmaker.ui.main.MainFragment
 import com.example.listmaker.ui.main.MainViewModel
 import com.example.listmaker.ui.main.MainViewModelFactory
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
                 )
 
             }
-            binding.floatingActionButton?.setOnClickListener {
+            binding.fabButton?.setOnClickListener {
                 showCreateTaskDialog()
             }
         }

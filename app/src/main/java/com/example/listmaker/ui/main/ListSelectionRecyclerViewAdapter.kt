@@ -3,23 +3,24 @@ package com.example.listmaker.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.listmaker.databinding.ListSelectionViewHolderBinding
 import com.example.listmaker.TaskList
+import com.example.listmaker.databinding.ListSelectionViewHolderBinding
 
-class ListSelectionRecyclerViewAdapter(val lists : MutableList<TaskList>, val clickListener: ListSelectionRecyclerViewClickListener) : RecyclerView.Adapter<ListSelectionViewHolder>() {
-
-    val listTitles = arrayOf("Shopping list", "Chores", "Android Tutorials")
+class ListSelectionRecyclerViewAdapter(private val lists : MutableList<TaskList>, val clickListener: ListSelectionRecyclerViewClickListener) :
+    RecyclerView.Adapter<ListSelectionViewHolder>() {
 
     interface ListSelectionRecyclerViewClickListener {
         fun listItemClicked(list: TaskList)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSelectionViewHolder {
+        val binding =
+            ListSelectionViewHolderBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false)
 
-        val binding = ListSelectionViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        // 2
         return ListSelectionViewHolder(binding)
-
-
     }
 
     override fun onBindViewHolder(holder: ListSelectionViewHolder, position: Int) {
@@ -32,8 +33,8 @@ class ListSelectionRecyclerViewAdapter(val lists : MutableList<TaskList>, val cl
 
     override fun getItemCount(): Int {
         return lists.size
-    }
 
+    }
     fun listsUpdated() {
         notifyItemInserted(lists.size-1)
     }

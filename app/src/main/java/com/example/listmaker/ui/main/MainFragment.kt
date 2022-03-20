@@ -1,24 +1,21 @@
 package com.example.listmaker.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.listmaker.databinding.MainFragmentBinding
 import com.example.listmaker.TaskList
+import com.example.listmaker.databinding.MainFragmentBinding
 
-class MainFragment : Fragment(), ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
-
-    lateinit var clickListener: MainFragmentInteractionListener
+class MainFragment : Fragment(),
+    ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
+    lateinit var  clickListener: MainFragmentInteractionListener
 
     interface MainFragmentInteractionListener {
-
-
-
         fun listItemTapped(list: TaskList)
     }
 
@@ -30,30 +27,40 @@ class MainFragment : Fragment(), ListSelectionRecyclerViewAdapter.ListSelectionR
 
     private lateinit var viewModel: MainViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container:
-    ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = MainFragmentBinding.inflate(inflater, container,
             false)
-
         // 1
-        binding.listsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.listsRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext())
+        // 2
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(
-            requireActivity(),
-            MainViewModelFactory(PreferenceManager.getDefaultSharedPreferences(requireActivity()))).get(MainViewModel::class.java)
 
-        val recyclerViewAdapter = ListSelectionRecyclerViewAdapter(viewModel.lists, this)
+        viewModel = ViewModelProvider(requireActivity(),
+
+            MainViewModelFactory(PreferenceManager.getDefaultSharedPreferences(requireActivity())))
+
+            .get(MainViewModel::class.java)
+        val recyclerViewAdapter =
+            ListSelectionRecyclerViewAdapter(viewModel.lists, this)
         binding.listsRecyclerview.adapter = recyclerViewAdapter
         viewModel.onListAdded = {
             recyclerViewAdapter.listsUpdated()
+
+
         }
     }
+
     override fun listItemClicked(list: TaskList) {
         clickListener.listItemTapped(list)
     }
+
 }
